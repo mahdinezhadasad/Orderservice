@@ -35,6 +35,7 @@ class ProductRepositoryTest {
         assertNotNull (fetched);
         assertNotNull (fetched.getDescription ());
         assertNotNull (fetched.getCreatedDate ());
+        assertNotNull (fetched.getLastModifiedDate ());
         
         
     }
