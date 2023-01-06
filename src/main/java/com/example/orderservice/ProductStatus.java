@@ -1,4 +1,4 @@
-package com.example.orderservice.repositories;
+package com.example.orderservice;
 
 public enum ProductStatus {
     

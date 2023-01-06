@@ -1,2 +1,6 @@
-package com.example.orderservice.domain;public class OrderStatus {
+package com.example.orderservice.domain;
+
+public enum OrderStatus {
+    
+    NEW , IN_PROCESS ,COMPLETE
 }
