@@ -8,6 +8,7 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -54,7 +55,7 @@ import java.util.Set;
 })
 public class OrderHeader extends BaseEntity{
    
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
   //  @JoinColumn(name = "customer_id")
     private Customer customer;
     @Embedded
@@ -63,12 +64,12 @@ public class OrderHeader extends BaseEntity{
     private Address billToAddress;
     
     
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE} ,mappedBy = "orderHeader")
     private  OrderApproval orderApproval;
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
-    @OneToMany(mappedBy = "orderHeader", cascade = CascadeType.PERSIST)
-    private Set<OrderLine> orderLines;
+    @OneToMany(mappedBy = "orderHeader", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    private Set<OrderLine> orderLines ;
     
     public void addOrderLine(OrderLine orderLine){
         
@@ -86,6 +87,7 @@ public class OrderHeader extends BaseEntity{
     
     public void setOrderApproval(OrderApproval orderApproval) {
         this.orderApproval = orderApproval;
+        orderApproval.setOrderHeader (this);
     }
     
     public Address getShippingAddress() {
