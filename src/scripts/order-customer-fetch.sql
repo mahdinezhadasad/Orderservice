@@ -29,7 +29,7 @@ select orderheade0_.id                 as id1_3_0_,
 from order_header orderheade0_
          left outer join customer customer1_ on orderheade0_.customer_id = customer1_.id
          left outer join order_approval orderappro2_ on orderheade0_.id = orderappro2_.order_header_id
-where orderheade0_.id = ?
+where orderheade0_.id = ?;
 
 
 
@@ -44,7 +44,7 @@ select customer0_.id                 as id1_1_0_,
        customer0_.email              as email9_1_0_,
        customer0_.phone              as phone10_1_0_
 from customer customer0_
-where customer0_.id = ?
+where customer0_.id = ?;
 
 
 
@@ -68,4 +68,27 @@ select orderheade0_.id                 as id1_3_0_,
        orderappro1_.order_header_id    as order_he5_2_1_
 from order_header orderheade0_
          left outer join order_approval orderappro1_ on orderheade0_.id = orderappro1_.order_header_id
-where orderheade0_.id = ?
+where orderheade0_.id = ?;
+
+
+select orderappro0_.id                 as id1_2_1_,
+       orderappro0_.created_date       as created_2_2_1_,
+       orderappro0_.last_modified_date as last_mod3_2_1_,
+       orderappro0_.approved_by        as approved4_2_1_,
+       orderappro0_.order_header_id    as order_he5_2_1_,
+       orderheade1_.id                 as id1_3_0_,
+       orderheade1_.created_date       as created_2_3_0_,
+       orderheade1_.last_modified_date as last_mod3_3_0_,
+       orderheade1_.bill_to_address    as bill_to_4_3_0_,
+       orderheade1_.bill_to_city       as bill_to_5_3_0_,
+       orderheade1_.bill_to_state      as bill_to_6_3_0_,
+       orderheade1_.bill_to_zip_code   as bill_to_7_3_0_,
+       orderheade1_.customer_id        as custome13_3_0_,
+       orderheade1_.order_status       as order_st8_3_0_,
+       orderheade1_.shipping_address   as shipping9_3_0_,
+       orderheade1_.shipping_city      as shippin10_3_0_,
+       orderheade1_.shipping_state     as shippin11_3_0_,
+       orderheade1_.shipping_zip_code  as shippin12_3_0_
+from order_approval orderappro0_
+         left outer join order_header orderheade1_ on orderappro0_.order_header_id = orderheade1_.id
+where orderappro0_.order_header_id = ?

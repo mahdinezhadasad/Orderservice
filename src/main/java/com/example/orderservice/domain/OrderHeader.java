@@ -13,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -64,11 +66,13 @@ public class OrderHeader extends BaseEntity{
     private Address billToAddress;
     
     
-    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE} ,mappedBy = "orderHeader")
+    @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE} )
+    @Fetch (FetchMode.SELECT)
     private  OrderApproval orderApproval;
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
-    @OneToMany(mappedBy = "orderHeader", cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+    @OneToMany(mappedBy = "orderHeader", cascade = {CascadeType.PERSIST,CascadeType.REMOVE}, fetch = FetchType.EAGER)
+    @Fetch (FetchMode.SUBSELECT )
     private Set<OrderLine> orderLines ;
     
     public void addOrderLine(OrderLine orderLine){

@@ -18,8 +18,10 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @ActiveProfiles("local")
 @DataJpaTest
@@ -123,4 +125,34 @@ public class DataLoadTest {
         System.out.println ("Customer Name is : " + orderHeader.getCustomer ().getCustomerName ());
         
     }
+    @Test
+    void testN_PlusOneProblem(){
+        
+        Customer customer = customerRepository.findCustomerByCustomerNameIgnoreCase (TEST_CUSTOMER).get ();
+    
+        IntSummaryStatistics totalOrderd = orderHeaderRepository.findAllByCustomer(customer).stream()
+                .flatMap(orderHeader -> orderHeader.getOrderLines().stream())
+                .collect(Collectors.summarizingInt (OrderLine::getQuantityOrdered));
+    
+        System.out.println ("total ordered: " + totalOrderd.getSum ());
+    }
+    
+    @Test
+    void testDBLock(){
+        
+        Long id = 1L;
+        OrderHeader orderHeader = orderHeaderRepository.findById (id).get ();
+        
+        Address billToAddress = new Address();
+        billToAddress.setAddress ("JosefStrsse ");
+        orderHeader.setBillToAddress (billToAddress);
+        orderHeaderRepository.saveAndFlush (orderHeader);
+    
+        System.out.println (" I updated the order");
+        
+        
+        
+    }
+    
+   
 }
