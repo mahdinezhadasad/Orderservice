@@ -140,11 +140,11 @@ public class DataLoadTest {
     @Test
     void testDBLock(){
         
-        Long id = 1L;
+        Long id = 5L;
         OrderHeader orderHeader = orderHeaderRepository.findById (id).get ();
         
         Address billToAddress = new Address();
-        billToAddress.setAddress ("JosefStrsse ");
+        billToAddress.setAddress ("JosefSe8ewtrsse ");
         orderHeader.setBillToAddress (billToAddress);
         orderHeaderRepository.saveAndFlush (orderHeader);
     

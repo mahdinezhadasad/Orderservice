@@ -49,5 +49,30 @@ class ProductRepositoryTest {
         
     }
     
+    @Test
+    void addAndUpdateProduct(){
+    
+    
+        Product product = new Product ();
+        product.setDescription ("My Product");
+        product.setProductStatus (ProductStatus.NEW);
+    
+        Product savedProduct = productRepository.saveAndFlush (product);
+        
+        savedProduct.setQuantityOnHand (25);
+    
+        Product savedProduct2 = productRepository.saveAndFlush (product);
+    
+    
+        System.out.println (savedProduct2.getQuantityOnHand ());
+        
+        
+        
+        
+        
+        
+        
+    }
+    
     
 }

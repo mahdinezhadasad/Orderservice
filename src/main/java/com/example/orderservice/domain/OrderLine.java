@@ -2,6 +2,7 @@ package com.example.orderservice.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Version;
 
 import java.util.Objects;
 
@@ -13,6 +14,17 @@ public class OrderLine extends BaseEntity{
     private OrderHeader orderHeader;
     @ManyToOne
     private Product product;
+    
+    @Version
+    private Integer version;
+    
+    public Integer getVersion() {
+        return version;
+    }
+    
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
     
     public Integer getQuantityOrdered() {
         return quantityOrdered;
