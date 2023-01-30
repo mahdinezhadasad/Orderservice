@@ -5,6 +5,7 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Version;
+import org.hibernate.validator.constraints.Length;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -12,12 +13,13 @@ import java.util.Set;
 @Entity
 public class Customer extends BaseEntity{
     
+    @Length(max = 50)
     private String customerName;
     
     @Embedded
     private Address address;
     
-    
+    @Length(max = 20)
     private String phone;
     private String email;
     

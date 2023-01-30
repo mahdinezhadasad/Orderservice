@@ -111,7 +111,7 @@ class OrderHeaderRepositoryTest {
         
         OrderHeader orderHeader = new OrderHeader();
         Customer customer = new Customer();
-        customer.setCustomerName("new Customer");
+        customer.setCustomerName("new sdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
         orderHeader.setCustomer (customerRepository.save (customer));
         
         OrderLine  orderLine = new OrderLine();
